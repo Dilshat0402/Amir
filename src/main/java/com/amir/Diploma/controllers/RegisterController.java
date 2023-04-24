@@ -28,7 +28,7 @@ public class RegisterController {
     public String loginPage(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            return "registration";
+            return "login";
         }
         return "redirect:/";
     }

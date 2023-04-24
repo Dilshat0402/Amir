@@ -45,5 +45,8 @@ public class MainController {
         return "contact";
     }
 
+    @GetMapping("/itemDetail")
+    public String detail(){return "photo-detail";}
+
 
 }
