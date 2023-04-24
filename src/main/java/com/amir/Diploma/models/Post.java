@@ -8,22 +8,16 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "items")
+@Table(name = "posts")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Item {
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
-
-    private int price;
-
-    private int room;
-
-    private int bed;
 
     private String description;
 
