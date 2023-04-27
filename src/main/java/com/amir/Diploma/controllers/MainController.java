@@ -1,9 +1,10 @@
 package com.amir.Diploma.controllers;
 
-import com.amir.Diploma.models.Item;
+import com.amir.Diploma.models.Post;
+import com.amir.Diploma.models.User;
 import com.amir.Diploma.repositories.UserRepository;
+import com.amir.Diploma.services.impl.PostService;
 import com.amir.Diploma.services.impl.UserServiceImpl;
-import com.amir.Diploma.services.impl.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,24 +16,29 @@ import java.util.List;
 public class MainController {
 
     @Autowired
-    ItemService itemService;
+    PostService postService;
     @Autowired
     UserServiceImpl userServiceImpl;
     @Autowired
     UserRepository userRepository;
 
     @GetMapping("/")
-    public String posts(){
-        return "index";
-    }
-
-    @GetMapping("/index")
     public String items(
             Model model
     ){
-        List<Item> items = itemService.getAllItems();
-        model.addAttribute("item",items);
+        List<Post> posts = postService.getAllPosts();
+        model.addAttribute("posts",posts);
         return "index";
+    }
+
+    @GetMapping("/posts{postId}")
+    public String postById(
+            Model model,
+            @PathVariable Long postId
+    ){
+        Post post = postService.getPostById(postId);
+        model.addAttribute("post", post);
+        return "post-detail";
     }
 
     @GetMapping("/about")
@@ -46,7 +52,7 @@ public class MainController {
     }
 
     @GetMapping("/itemDetail")
-    public String detail(){return "photo-detail";}
+    public String detail(){return "post-detail";}
 
 
 }

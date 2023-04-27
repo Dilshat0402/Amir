@@ -13,11 +13,14 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Post {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
+
+
 
     private String description;
 
@@ -26,4 +29,8 @@ public class Post {
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User author;
+
+
+    public Post(long l, String no_title, String no_content, Timestamp timestamp, Object o, User user) {
+    }
 }
