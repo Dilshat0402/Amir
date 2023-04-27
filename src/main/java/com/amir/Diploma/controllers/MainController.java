@@ -1,7 +1,9 @@
 package com.amir.Diploma.controllers;
 
+import com.amir.Diploma.models.Doctor;
 import com.amir.Diploma.models.Post;
 import com.amir.Diploma.models.User;
+import com.amir.Diploma.repositories.DoctorRepository;
 import com.amir.Diploma.repositories.UserRepository;
 import com.amir.Diploma.services.impl.PostService;
 import com.amir.Diploma.services.impl.UserServiceImpl;
@@ -21,6 +23,8 @@ public class MainController {
     UserServiceImpl userServiceImpl;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    DoctorRepository doctorRepository;
 
     @GetMapping("/")
     public String items(
@@ -39,6 +43,26 @@ public class MainController {
         Post post = postService.getPostById(postId);
         model.addAttribute("post", post);
         return "post-detail";
+    }
+
+    @GetMapping("/doctors")
+    public String doctors(
+        Model model
+    ){
+        List<Doctor> doctors = doctorRepository.findAll();
+        model.addAttribute("doctors",doctors);
+        return "doctors";
+    }
+
+
+
+
+
+
+
+    @GetMapping("/calendar")
+    public String calendar(){
+        return "calendar";
     }
 
     @GetMapping("/about")
