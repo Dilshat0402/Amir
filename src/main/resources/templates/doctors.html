@@ -28,7 +28,7 @@
 <nav class="navbar navbar-expand-lg">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      Libery Shop
+      Liberi Med.Help
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <i class="fas fa-bars"></i>
@@ -39,19 +39,28 @@
           <a class="nav-link nav-link-1 " th:href="@{/}">Статьи</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-link-3" th:href="@{/about}">About</a>
+          <a class="nav-link nav-link-1 " th:href="@{/doctors}">Врачи</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-link-4" th:href="@{/contact}">Contact</a>
+          <a class="nav-link nav-link-1 " th:href="@{/applications}">Мои заявки</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-link-5" th:href="@{/login}">Login</a>
+          <a class="nav-link nav-link-1 " th:href="@{/calendar}">Календарь</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-link-6" th:href="@{/logout}">Log Out</a>
+          <a class="nav-link nav-link-3" th:href="@{/about}">О нас</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-link-7" th:href="@{/registration}">Register</a>
+          <a class="nav-link nav-link-4" th:href="@{/contact}">Контакты</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-5" th:href="@{/login}">Войти</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-6" th:href="@{/logout}">Выйти</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-7" th:href="@{/registration}">Регистрация</a>
         </li>
       </ul>
     </div>
@@ -73,10 +82,14 @@
     <div class="card-body">
       <h5 class="card-title" th:text="${doctor.username}"></h5>
       <p class="card-text" th:text="${doctor.description}"></p>
+      <a th:href="'doctors' + ${doctor.id}" class="btn btn-primary">Консультация</a>
     </div>
   </div>
 </div>
-
+<br>
+<br>
+<br>
+<br>
 
 <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
   <div class="container-fluid tm-container-small">

@@ -21,6 +21,10 @@ public class Doctor {
 
         private String description;
 
+        @Override
+        public String toString() {
+                return "Ваш врач "+username;
+        }
     }
 
 
