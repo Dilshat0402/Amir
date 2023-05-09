@@ -148,5 +148,7 @@ public class MainController {
     @GetMapping("/itemDetail")
     public String detail(){return "post-detail";}
 
+    @GetMapping("/reminders")
+    public String reminders(){return "reminders";}
 
 }
