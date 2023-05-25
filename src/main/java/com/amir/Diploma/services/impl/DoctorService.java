@@ -18,7 +18,7 @@ public class DoctorService {
     }
 
     public Doctor getDoctorById(Long id) {
-        return doctorRepository.findById(id).orElse(new Doctor(0L, "NO Name","No Description"));
+        return doctorRepository.findById(id).orElse(new Doctor(0L, "NO Name","No Description",null,0,0));
     }
 
 }

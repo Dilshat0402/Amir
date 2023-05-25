@@ -67,27 +67,17 @@
 <div class="container-fluid tm-container-content tm-mt-60">
   <div class="row mb-4">
     <h2 class="col-6 tm-text-primary">
-      Врачи
+      Ваши заявки
     </h2>
   </div>
-  <div class="card" style="width: 18rem; display: inline-block;"  th:each="doctor : ${doctors}">
-    <img class="card-img-top" src="https://юцентр.рф/wp-content/uploads/2020/11/pats3.png" alt="Card image cap">
+  <div class="card" style="width: 18rem; display: inline-block;"  th:each="message : ${messages}">
     <div class="card-body">
-      <h5 class="card-title" th:text="${doctor.username}"></h5>
-      <h5>Рейтинг врача<h5 class="card-title" th:text="${doctor.averageRating}"></h5></h5>
-      <p class="card-text" th:text="${doctor.description}"></p>
-      <a th:href="'doctors' + ${doctor.id}" class="btn btn-primary">Консультация</a>
+      <h5 th:text="${message.doctor}"></h5>
+      Ваша проблема: <h5 class="card-title" th:text="${message.description}"></h5>
+      <h5>Ожидайте обратной связи.</h5>
     </div>
-    <form th:action="@{/doctors/{doctorName}/rate(doctorName=${doctor.username})}" method="post">
-      <input type="number" name="rating" min="1" max="5" required>
-      <button type="submit">Оценить</button>
-    </form>
   </div>
 </div>
-<br>
-<br>
-<br>
-<br>
 
 <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
   <div class="container-fluid tm-container-small">

@@ -21,6 +21,23 @@ public class Doctor {
 
         private String description;
 
+        private String email;
+
+        private int totalRating;
+        private int ratingCount;
+
+        public double getAverageRating() {
+                if (ratingCount == 0) {
+                        return 0;
+                }
+                return (double) totalRating / ratingCount;
+        }
+
+        public void addRating(int rating) {
+                totalRating += rating;
+                ratingCount++;
+        }
+
         @Override
         public String toString() {
                 return "Ваш врач "+username;
