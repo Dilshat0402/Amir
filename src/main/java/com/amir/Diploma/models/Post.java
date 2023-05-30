@@ -20,9 +20,23 @@ public class Post {
 
     private String title;
 
-
-
     private String description;
+
+    private int totalRating;
+    private int ratingCount;
+
+    public double getAverageRating() {
+        if (ratingCount == 0) {
+            return 0;
+        }
+        return (double) totalRating / ratingCount;
+    }
+
+    public void addRating(int rating) {
+        totalRating += rating;
+        ratingCount++;
+    }
+
 
     @Column(name = "post_date")
     private Timestamp postDate;

@@ -12,4 +12,5 @@ import java.util.List;
 public interface MessageRepository extends JpaRepository<Message,Long> {
     List<Message> findAll();
     List<Message> findMessageByUserId(Long userId);
+    List<Message> findMessageByDoctorId(Long docId);
 }

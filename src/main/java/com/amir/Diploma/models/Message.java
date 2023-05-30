@@ -18,6 +18,8 @@ public class Message {
 
     private String description;
 
+    private String answer;
+
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 

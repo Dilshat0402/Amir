@@ -70,20 +70,21 @@
             Ваши заявки
         </h2>
     </div>
-    <div class="card" style="width: 18rem; display: inline-block;"  th:each="message : ${messages}">
-        <div class="card-body">
-            <h5 th:text="${message.doctor}"></h5>
-            Ваша проблема: <h5 class="card-title" th:text="${message.description}"></h5>
-                <h5>
-                    Ответ врача:
-                    <span th:text="${message.answer != null ? message.answer : 'Ожидайте обратной связи.'}"></span>
-                </h5>
-        </div>
+    <div class="card" style="width: 18rem; display: inline-block;"  th:each="message : ${docMessages}">
+        <form class="card-body" th:action="@{/applications}" method="post">
+            Имя Клиента:<h5 th:text="${message.user.username}"></h5>
+            <input type="hidden" th:name="user" th:value="${message.user.username}">
+            Жалоба: <h5 class="card-title" th:text="${message.description}" th:name="description"></h5>
+            <input type="hidden" th:name="description" th:value="${message.description}">
+            <h5>Ответить</h5>
+            <input type="text" name="answer">
+            <div class="button">
+                <input type="submit" value="Отправить">
+            </div>
+        </form>
     </div>
 </div>
-<br>
-<br>
-<br>
+
 <footer class="tm-bg-gray pt-5 pb-3 tm-text-gray tm-footer">
     <div class="container-fluid tm-container-small">
         <div class="row">

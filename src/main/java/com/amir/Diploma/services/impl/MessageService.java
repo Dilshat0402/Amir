@@ -22,4 +22,7 @@ public class MessageService {
     public List<Message> getMessageByUserId(Long userId){
         return messageRepository.findMessageByUserId(userId);
     }
+    public List<Message> getMessagesByDoctorId(Long docId){
+        return messageRepository.findMessageByDoctorId(docId);
+    }
 }

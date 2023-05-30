@@ -2,6 +2,7 @@ package com.amir.Diploma.controllers;
 
 import com.amir.Diploma.models.*;
 import com.amir.Diploma.repositories.DoctorRepository;
+import com.amir.Diploma.repositories.PostRepository;
 import com.amir.Diploma.repositories.UserRepository;
 import com.amir.Diploma.services.impl.DoctorService;
 import com.amir.Diploma.services.impl.MessageService;
@@ -36,6 +37,8 @@ public class MainController {
     DoctorService doctorService;
     @Autowired
     MessageService messageService;
+    @Autowired
+    PostRepository postRepository;
 
     @GetMapping("/")
     public String items(
@@ -99,7 +102,7 @@ public class MainController {
                 }
             }
             Doctor doctor = doctorService.getDoctorById(doctorId);
-            Message message = new Message(null, description, user1, doctor);
+            Message message = new Message(null, description,null, user1, doctor);
             message = messageService.addMessage(message);
             /*return "redirect:/posts/" + post.getId();*/
             return "redirect:/applications";
@@ -140,22 +143,38 @@ public class MainController {
                     mainUser = user;
                 }
             }
-            Collection<Role> r = mainUser.getRoles();
-            for (Role role : r) {
-                if (role.getName().equals("USER")) {
-                    System.out.println("////////////////////////");
-                } else {
-                    System.out.println("qwwwwwwwwwwwwwwwwww");
-                }
+            if (mainUser.getRole().equals("USER")) {
+                Long id = mainUser.getId();
+                List<Message> messages = messageService.getMessageByUserId(id);
+                model.addAttribute("messages", messages);
+                return "applications";
+            }else if(mainUser.getRole().equals("DOC")){
+                Long id = mainUser.getId();
+                List<Message> messages = messageService.getMessagesByDoctorId(id);
+                model.addAttribute("docMessages",messages);
+                return "docApp";
             }
-
-            Long id = mainUser.getId();
-            List<Message> messages = messageService.getMessageByUserId(id);
-            model.addAttribute("messages", messages);
-
-            return "applications";
         }
+        //В случае ошибки пользователя
+        return "index";
     }
+
+    @PostMapping("/applications")
+    public String saveAnswer(@RequestParam String answer,
+                             @RequestParam String description,
+                             @RequestParam String user){
+        Message mainMessage = null;
+        List<Message> messages = messageService.getAllMessages();
+        for (Message message:messages) {
+            if (message.getDescription().equals(description) || message.getUser().getUsername().equals(user)){
+                mainMessage = message;
+            }
+        }
+        mainMessage.setAnswer(answer);
+        messageService.addMessage(mainMessage);
+        return "index";
+    }
+
 
     @GetMapping("/requests")
     public String docApp(Model model) {
@@ -180,6 +199,8 @@ public class MainController {
 
         return "requests";
     }
+
+
 
 
     @GetMapping("/calendar")
